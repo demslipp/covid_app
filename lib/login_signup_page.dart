@@ -1,9 +1,7 @@
 import 'dart:ui';
-import 'package:flutter/cupertino.dart';
-
-void main() {
-  runApp(MyApp());
-}
+import 'package:covid_app/login_info.dart';
+import 'package:covid_app/quiz_pagee.dart';
+import 'package:flutter/material.dart';
 
 enum _DoubleConstants {
   textFieldContainerHeight,
@@ -23,15 +21,6 @@ extension _DoubleConstantsExtension on _DoubleConstants {
       default:
         return null;
     }
-  }
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoApp(
-      home: LoginSignUpPage(),
-    );
   }
 }
 
@@ -86,11 +75,11 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return new CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        middle: Text("Login page"),
+    return new Scaffold(
+      appBar: AppBar(
+        title: Text("Страница регистрации"),
       ),
-      child: Stack(
+      body: Stack(
         children: <Widget>[
           _showForm(),
           _showCircularProgress(),
@@ -126,7 +115,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
       width: 200,
       child: Center(
         child: Text(
-          _isLoginForm ? "User account" : "Registration",
+          _isLoginForm ? "Аккаунт пользователя" : "Регистрация",
         ),
       ),
     );
@@ -135,33 +124,16 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
   Widget showEmailInput() {
     return new Padding(
       padding: EdgeInsets.fromLTRB(0.0, _isLoginForm ? 10.0 : 00.0, 0.0, 0.4),
-      child: new CupertinoTextField(
+      child: new TextField(
         maxLines: 1,
         keyboardType: TextInputType.emailAddress,
         autofocus: true,
         controller: _email,
         maxLength: 30,
-        placeholder: 'Email',
+        decoration:
+        InputDecoration(border: InputBorder.none, hintText: 'Email'),
         showCursor: true,
         autocorrect: false,
-        prefix: Container(
-          height: _DoubleConstants.textFieldContainerHeight.value,
-          width: _DoubleConstants.textFieldContainerWidth.value,
-          alignment: Alignment.centerLeft,
-          child: Text(
-            "Login",
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ),
-        decoration: BoxDecoration(
-          border: Border.symmetric(
-            vertical: BorderSide(
-              width: _DoubleConstants.textFieldDecorationBorderWidth.value,
-              color: CupertinoColors.separator,
-            ),
-          ),
-          //borderRadius: BorderRadius.circular(32.0),
-        ),
       ),
     );
   }
@@ -169,70 +141,61 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
   Widget showPasswordInput() {
     return new Padding(
       padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
-      child: new CupertinoTextField(
+      child: new TextField(
         maxLines: 1,
         obscureText: true,
         autofocus: true,
         autocorrect: false,
         keyboardType: TextInputType.visiblePassword,
         controller: _password,
-        placeholder: "Profile's password",
-        prefix: Container(
-          height: _DoubleConstants.textFieldContainerHeight.value,
-          width: _DoubleConstants.textFieldContainerWidth.value,
-          alignment: Alignment.centerLeft,
-          child: Text(
-            "Pass",
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ),
-        decoration: BoxDecoration(
-            border: Border(
-          bottom: BorderSide(
-            width: _DoubleConstants.textFieldDecorationBorderWidth.value,
-            color: CupertinoColors.separator,
-          ),
-        )),
+        decoration:
+        InputDecoration(border: InputBorder.none, hintText: 'Пароль'),
       ),
     );
   }
 
   Widget showPrimaryButton() {
-    return new Padding(
-        padding: EdgeInsets.fromLTRB(0.0, _isLoginForm ? 40.0 : 30.0, 0.0, 0.0),
-        child: SizedBox(
-          height: 50.0,
-          child: new CupertinoButton.filled(
-            disabledColor: CupertinoColors.quaternarySystemFill,
-            pressedOpacity: 0.4,
-            borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-            child: new Text(_isLoginForm ? 'Login' : 'Create account',
-                style: new TextStyle(
-                    fontSize: 18.0, color: CupertinoColors.white)),
-            onPressed: null,
-          ),
-        ));
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LoginInfo()),
+        );
+      },
+      child: Padding(
+          padding:
+          EdgeInsets.fromLTRB(0.0, _isLoginForm ? 40.0 : 30.0, 0.0, 0.0),
+          child: SizedBox(
+            height: 50.0,
+            child: new MaterialButton(
+              disabledColor: Colors.red,
+              child: new Text(_isLoginForm ? 'Войти' : 'Создать аккаунт',
+                  style: new TextStyle(fontSize: 18.0, color: Colors.white)),
+              onPressed: null,
+            ),
+          )),
+    );
   }
 
   Widget showSecondaryButton() {
-    return new CupertinoButton(
+    return new MaterialButton(
         child: new Text(
-            _isLoginForm ? 'Create an account' : 'Have an account? Sign in',
+            _isLoginForm ? 'Cоздать аккаунт' : 'Уже есть аккаунт? Войдите',
             style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300)),
         onPressed: toggleFormMode);
   }
 
   Widget showErrorMessage() {
     if (_errorMessage.length > 0 && _errorMessage != null) {
-      return new CupertinoAlertDialog(
+      return new AlertDialog(
           content: Text(
-        _errorMessage,
-        style: TextStyle(
-            fontSize: 13.0,
-            color: CupertinoColors.systemRed,
-            height: 1.0,
-            fontWeight: FontWeight.bold),
-      ));
+            _errorMessage,
+            style: TextStyle(
+                fontSize: 13.0,
+                color: Colors.blue,
+                height: 1.0,
+                fontWeight: FontWeight.bold),
+          ));
     } else {
       return new Container(
         height: 0.0,
@@ -245,8 +208,8 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
       return Opacity(
           opacity: 0.3,
           child: Container(
-              color: CupertinoColors.lightBackgroundGray,
-              child: Center(child: CupertinoActivityIndicator())));
+              color: Colors.blueGrey,
+              child: Center(child: CircularProgressIndicator())));
     }
     return Container(
       height: 0.0,

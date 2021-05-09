@@ -29,7 +29,7 @@ class GenerateScreenState extends State<GenerateScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('QR Code Generator'),
+        title: Text('Генератор QR кода'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.share),
@@ -83,7 +83,7 @@ class GenerateScreenState extends State<GenerateScreen> {
                     child:  TextField(
                       controller: _textController,
                       decoration:  InputDecoration(
-                        hintText: "Enter a custom message",
+                        hintText: "Фамилия Имя Отчество",
                         errorText: _inputErrorText,
                       ),
                     ),
@@ -91,7 +91,7 @@ class GenerateScreenState extends State<GenerateScreen> {
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0),
                     child:  FlatButton(
-                      child:  Text("SUBMIT"),
+                      child:  Text("Создать"),
                       onPressed: () {
                         setState((){
                           _dataString = _textController.text;

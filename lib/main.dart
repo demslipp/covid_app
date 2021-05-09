@@ -1,5 +1,10 @@
+import 'package:covid_app/homepage.dart';
+import 'package:covid_app/login_signup_page.dart';
+import 'package:covid_app/quiz_pagee.dart';
 import 'package:flutter/material.dart';
 import 'package:covid_app/home_screen.dart';
+
+import 'login_info.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomeScreen(),
+      home: HomePage(),
     );
   }
 }
