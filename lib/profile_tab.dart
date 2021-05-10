@@ -1,33 +1,31 @@
 import 'dart:ui';
+
 import 'package:covid_app/User.dart';
 import 'package:covid_app/quiz_page.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class ProfileTab extends StatefulWidget{
-
+class ProfileTab extends StatefulWidget {
   ProfileTab({this.user});
 
   User user;
 
   @override
-  State<StatefulWidget> createState() =>_ProfileTabState();
+  State<StatefulWidget> createState() => _ProfileTabState();
 }
 
-class _ProfileTabState extends State<ProfileTab>{
+class _ProfileTabState extends State<ProfileTab> {
   TextEditingController _surname = TextEditingController();
   TextEditingController _name = TextEditingController();
-  TextEditingController _country= TextEditingController();
+  TextEditingController _country = TextEditingController();
   TextEditingController _city = TextEditingController();
   DateTime _dateTime;
   bool _isLoading = false;
   bool _isEditable = false;
 
-
   final format = DateFormat("dd-MM-yyyy");
   bool islogended = false;
-
 
   @override
   void initState() {
@@ -51,6 +49,7 @@ class _ProfileTabState extends State<ProfileTab>{
       ),
     );
   }
+
   Widget _showCircularProgress() {
     if (_isLoading) {
       return Opacity(
@@ -94,7 +93,7 @@ class _ProfileTabState extends State<ProfileTab>{
         enabled: _isEditable,
         controller: _surname,
         decoration:
-        InputDecoration(border: InputBorder.none, hintText: 'Фамилия'),
+            InputDecoration(border: InputBorder.none, hintText: 'Фамилия'),
         showCursor: true,
         autocorrect: false,
       ),
@@ -110,8 +109,7 @@ class _ProfileTabState extends State<ProfileTab>{
         autofocus: true,
         controller: _name,
         enabled: _isEditable,
-        decoration:
-        InputDecoration(border: InputBorder.none, hintText: 'Имя'),
+        decoration: InputDecoration(border: InputBorder.none, hintText: 'Имя'),
         showCursor: true,
         autocorrect: false,
       ),
@@ -128,12 +126,13 @@ class _ProfileTabState extends State<ProfileTab>{
         controller: _country,
         enabled: _isEditable,
         decoration:
-        InputDecoration(border: InputBorder.none, hintText: 'Страна'),
+            InputDecoration(border: InputBorder.none, hintText: 'Страна'),
         showCursor: true,
         autocorrect: false,
       ),
     );
   }
+
   Widget showCityInput() {
     return new Padding(
       padding: EdgeInsets.fromLTRB(10.0, 00.0, 0.0, 0.4),
@@ -144,23 +143,22 @@ class _ProfileTabState extends State<ProfileTab>{
         autofocus: true,
         controller: _city,
         decoration:
-        InputDecoration(border: InputBorder.none, hintText: 'Город'),
+            InputDecoration(border: InputBorder.none, hintText: 'Город'),
         showCursor: true,
         autocorrect: false,
       ),
     );
   }
 
-  void shit() {
-
-  }
+  void shit() {}
 
   Widget showDateInput() {
     return Column(children: <Widget>[
       DateTimeField(
         format: format,
         scrollPadding: EdgeInsets.fromLTRB(20.0, 200.0, 0.0, 0.4),
-        decoration: InputDecoration(border: InputBorder.none, hintText: 'Дата рождения'),
+        decoration: InputDecoration(
+            border: InputBorder.none, hintText: 'Дата рождения'),
         initialValue: _dateTime,
         enabled: _isEditable,
         onChanged: (DateTime date) {
@@ -182,14 +180,18 @@ class _ProfileTabState extends State<ProfileTab>{
       onTap: () {
         Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => QuizPage2(user: new User(surname: _surname.value.text,
-                firstname: _name.value.text, date: _dateTime,
-                country: _country.value.text, city: _city.value.text)),
+            MaterialPageRoute(
+              builder: (context) => QuizPage2(
+                  user: new User(
+                      surname: _surname.value.text,
+                      firstname: _name.value.text,
+                      date: _dateTime,
+                      country: _country.value.text,
+                      city: _city.value.text)),
             ));
       },
       child: Padding(
-          padding:
-          EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+          padding: EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
           child: SizedBox(
             height: 50.0,
             child: new MaterialButton(
@@ -203,11 +205,10 @@ class _ProfileTabState extends State<ProfileTab>{
   }
 
   void finishlog() {
-    setState(){islogended = true;}
+    setState() {
+      islogended = true;
+    }
   }
-
-
-
 }
 
 /*class BasicDateField extends StatelessWidget {

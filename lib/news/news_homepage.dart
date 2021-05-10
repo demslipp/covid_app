@@ -5,6 +5,7 @@ import 'package:covid_app/news/data.dart';
 import 'package:covid_app/news/news.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import '../models/widgets.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,7 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   bool _loading;
   var newslist;
   List<CategoryModel> categories = List<CategoryModel>();
@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
     var formatter = new DateFormat('yyyy-MM-dd');
     String myTo = formatter.format(to);
     print(myTo);
-    var from = DateTime.now().subtract(Duration(days:1));
+    var from = DateTime.now().subtract(Duration(days: 1));
     String myFrom = formatter.format(from);
     News news = News();
     await news.getNews(myFrom, myTo);
@@ -48,48 +48,48 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: _loading
             ? Center(
-          child: CircularProgressIndicator(),
-        )
+                child: CircularProgressIndicator(),
+              )
             : SingleChildScrollView(
-          child: Container(
-            child: Column(
-              children: <Widget>[
-                /// Categories
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  height: 70,
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: categories.length,
-                      itemBuilder: (context, index) {
-                        return CategoryCard(
-                          imageAssetUrl: categories[index].imageAssetUrl,
-                          categoryName: categories[index].categoryName,
-                        );
-                      }),
-                ),
+                child: Container(
+                  child: Column(
+                    children: <Widget>[
+                      /// Categories
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        height: 70,
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: categories.length,
+                            itemBuilder: (context, index) {
+                              return CategoryCard(
+                                imageAssetUrl: categories[index].imageAssetUrl,
+                                categoryName: categories[index].categoryName,
+                              );
+                            }),
+                      ),
 
-                /// News Article
-                Container(
-                  margin: EdgeInsets.only(top: 16),
-                  child: ListView.builder(
-                      itemCount: newslist.length,
-                      shrinkWrap: true,
-                      physics: ClampingScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return NewsTile(
-                          imgUrl: newslist[index].urlToImage ?? "",
-                          title: newslist[index].title ?? "",
-                          desc: newslist[index].description ?? "",
-                          content: newslist[index].content ?? "",
-                          posturl: newslist[index].articleUrl ?? "",
-                        );
-                      }),
+                      /// News Article
+                      Container(
+                        margin: EdgeInsets.only(top: 16),
+                        child: ListView.builder(
+                            itemCount: newslist.length,
+                            shrinkWrap: true,
+                            physics: ClampingScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return NewsTile(
+                                imgUrl: newslist[index].urlToImage ?? "",
+                                title: newslist[index].title ?? "",
+                                desc: newslist[index].description ?? "",
+                                content: newslist[index].content ?? "",
+                                posturl: newslist[index].articleUrl ?? "",
+                              );
+                            }),
+                      ),
+                    ],
+                  ),
                 ),
-              ],
-            ),
-          ),
-        ),
+              ),
       ),
     );
   }
@@ -103,12 +103,13 @@ class CategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(
-            builder: (context) => CategoryNews(
-              newsCategory: categoryName.toLowerCase(),
-            )
-        ));
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => CategoryNews(
+                      newsCategory: categoryName.toLowerCase(),
+                    )));
       },
       child: Container(
         margin: EdgeInsets.only(right: 14),
@@ -129,8 +130,7 @@ class CategoryCard extends StatelessWidget {
               width: 120,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
-                  color: Colors.black26
-              ),
+                  color: Colors.black26),
               child: Text(
                 categoryName,
                 textAlign: TextAlign.center,

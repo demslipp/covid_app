@@ -1,6 +1,6 @@
 import 'dart:ui';
+
 import 'package:covid_app/login_info.dart';
-import 'package:covid_app/quiz_page.dart';
 import 'package:flutter/material.dart';
 
 enum _DoubleConstants {
@@ -131,7 +131,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
         controller: _email,
         maxLength: 30,
         decoration:
-        InputDecoration(border: InputBorder.none, hintText: 'Email'),
+            InputDecoration(border: InputBorder.none, hintText: 'Email'),
         showCursor: true,
         autocorrect: false,
       ),
@@ -149,7 +149,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
         keyboardType: TextInputType.visiblePassword,
         controller: _password,
         decoration:
-        InputDecoration(border: InputBorder.none, hintText: 'Пароль'),
+            InputDecoration(border: InputBorder.none, hintText: 'Пароль'),
       ),
     );
   }
@@ -164,7 +164,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
       },
       child: Padding(
           padding:
-          EdgeInsets.fromLTRB(0.0, _isLoginForm ? 40.0 : 30.0, 0.0, 0.0),
+              EdgeInsets.fromLTRB(0.0, _isLoginForm ? 40.0 : 30.0, 0.0, 0.0),
           child: SizedBox(
             height: 50.0,
             child: new MaterialButton(
@@ -189,13 +189,13 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
     if (_errorMessage.length > 0 && _errorMessage != null) {
       return new AlertDialog(
           content: Text(
-            _errorMessage,
-            style: TextStyle(
-                fontSize: 13.0,
-                color: Colors.blue,
-                height: 1.0,
-                fontWeight: FontWeight.bold),
-          ));
+        _errorMessage,
+        style: TextStyle(
+            fontSize: 13.0,
+            color: Colors.blue,
+            height: 1.0,
+            fontWeight: FontWeight.bold),
+      ));
     } else {
       return new Container(
         height: 0.0,

@@ -1,15 +1,16 @@
-import 'package:intl/intl.dart';
-import 'package:http/http.dart' as http;
-import 'package:covid_app/models/article.dart';
 import 'dart:convert';
+
+import 'package:covid_app/models/article.dart';
 import 'package:covid_app/news/key.dart';
+import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class News {
-
   List<Article> news = [];
+
   Future<void> getNews(myFrom, myTo) async {
     String url =
-        "http://newsapi.org/v2/everything?q=коронавирус&language=ru&from=$myFrom&to=$myTo&sortBy=publishedAt&apiKey=$apiKey";;
+        "http://newsapi.org/v2/everything?q=коронавирус&language=ru&from=$myFrom&to=$myTo&sortBy=publishedAt&apiKey=$apiKey";
     print("url check:  " + url);
     var response = await http.get(url);
 
@@ -42,9 +43,9 @@ class NewsForCategory {
     var formatter = new DateFormat('yyyy-MM-dd');
     String myTo = formatter.format(to);
     print(myTo);
-    var from = DateTime.now().subtract(Duration(days:1));
+    var from = DateTime.now().subtract(Duration(days: 1));
     String myFrom = formatter.format(from);
-    /*String url = "http://newsapi.org/v2/everything?q=$category&apiKey=${apiKey}";*/
+
     String url =
         "http://newsapi.org/v2/everything?q=$category&from=$myFrom&to=$myTo&sortBy=publishedAt&apiKey=$apiKey";
     print("url check: " + url);

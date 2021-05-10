@@ -1,23 +1,20 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'dart:io';
-import 'dart:async';
-
-class DetailWidget extends StatefulWidget  {
-
+class DetailWidget extends StatefulWidget {
   String _filePath;
+
   DetailWidget(this._filePath);
 
   @override
   State<StatefulWidget> createState() {
     return _DetailState();
   }
-
 }
 
 class _DetailState extends State<DetailWidget> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,13 +24,11 @@ class _DetailState extends State<DetailWidget> {
             IconButton(
               icon: Icon(Icons.share),
               onPressed: () {
-
-                final channel = const MethodChannel('channel:me.alfian.share/share');
+                final channel =
+                    const MethodChannel('channel:me.alfian.share/share');
                 channel.invokeMethod('shareFile', 'image.png');
-
               },
             )
-
           ],
         ),
         body: Container(
@@ -43,12 +38,9 @@ class _DetailState extends State<DetailWidget> {
                 child: widget._filePath == null
                     ? Text('No Image')
                     : Container(
-                    child: Image.file(File(widget._filePath), fit: BoxFit.fitWidth))
-            ),
+                        child: Image.file(File(widget._filePath),
+                            fit: BoxFit.fitWidth))),
           ),
-        )
-    );
-
+        ));
   }
-
 }

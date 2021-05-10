@@ -35,15 +35,15 @@ class _ScanState extends State<ScanScreen> {
                     textColor: Colors.white,
                     splashColor: Colors.blueGrey,
                     onPressed: scan,
-                    child: const Text('Cканировать')
-                ),
-              )
-              ,
+                    child: const Text('Cканировать')),
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: Text(barcode, textAlign: TextAlign.center,),
-              )
-              ,
+                child: Text(
+                  barcode,
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ],
           ),
         ));
@@ -61,8 +61,9 @@ class _ScanState extends State<ScanScreen> {
       } else {
         setState(() => this.barcode = 'Unknown error: $e');
       }
-    } on FormatException{
-      setState(() => this.barcode = 'null (User returned using the "back"-button before scanning anything. Result)');
+    } on FormatException {
+      setState(() => this.barcode =
+          'null (User returned using the "back"-button before scanning anything. Result)');
     } catch (e) {
       setState(() => this.barcode = 'Unknown error: $e');
     }

@@ -20,7 +20,7 @@ List<CategoryModel> getCategories() {
   categoryModel = new CategoryModel();
   categoryModel.categoryName = "Финансы";
   categoryModel.imageAssetUrl =
-  "https://images.unsplash.com/photo-1591696205602-2f950c417cb9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80";
+      "https://images.unsplash.com/photo-1591696205602-2f950c417cb9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80";
   myCategories.add(categoryModel);
   return myCategories;
 }

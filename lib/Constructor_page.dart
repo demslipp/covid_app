@@ -7,8 +7,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:covid_app/Constructor_page.dart';
-
 void main() => runApp(ExampleApp());
 
 /// The example application class

@@ -1,8 +1,8 @@
 import 'package:covid_app/models/widgets.dart';
-import 'package:flutter/material.dart';
 import 'package:covid_app/news/news.dart';
-class CategoryNews extends StatefulWidget {
+import 'package:flutter/material.dart';
 
+class CategoryNews extends StatefulWidget {
   final String newsCategory;
 
   CategoryNews({this.newsCategory});
@@ -33,28 +33,30 @@ class _CategoryNewsState extends State<CategoryNews> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _loading ? Center(
-        child: CircularProgressIndicator(),
-      ) : SingleChildScrollView(
-        child: Container(
-          child: Container(
-            margin: EdgeInsets.only(top: 16),
-            child: ListView.builder(
-                itemCount: newslist.length,
-                shrinkWrap: true,
-                physics: ClampingScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return NewsTile(
-                    imgUrl: newslist[index].urlToImage ?? "",
-                    title: newslist[index].title ?? "",
-                    desc: newslist[index].description ?? "",
-                    content: newslist[index].content ?? "",
-                    posturl: newslist[index].articleUrl ?? "",
-                  );
-                }),
-          ),
-        ),
-      ),
+      body: _loading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : SingleChildScrollView(
+              child: Container(
+                child: Container(
+                  margin: EdgeInsets.only(top: 16),
+                  child: ListView.builder(
+                      itemCount: newslist.length,
+                      shrinkWrap: true,
+                      physics: ClampingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return NewsTile(
+                          imgUrl: newslist[index].urlToImage ?? "",
+                          title: newslist[index].title ?? "",
+                          desc: newslist[index].description ?? "",
+                          content: newslist[index].content ?? "",
+                          posturl: newslist[index].articleUrl ?? "",
+                        );
+                      }),
+                ),
+              ),
+            ),
     );
   }
 }

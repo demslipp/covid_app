@@ -21,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     final message =
-    // ignore: lines_longer_than_80_chars
+        // ignore: lines_longer_than_80_chars
         'Hey this is a QR code. Change this value in the main_screen.dart file.';
 
     final qrFutureBuilder = FutureBuilder<ui.Image>(
