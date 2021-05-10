@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:covid_app/User.dart';
-import 'package:covid_app/quiz_pagee.dart';
+import 'package:covid_app/quiz_page.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -17,7 +17,7 @@ class _LoginInfoState extends State<LoginInfo>{
   TextEditingController _city = TextEditingController();
   DateTime _dateTime;
   bool _isLoading = false;
-  final format = DateFormat("yyyy-MM-dd");
+  final format = DateFormat("dd-MM-yyyy");
   bool islogended = false;
   @override
   Widget build(BuildContext context) {

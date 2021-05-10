@@ -1,7 +1,6 @@
-import 'package:covid_app/widgets.dart';
+import 'package:covid_app/models/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:covid_app/news2.dart';
-
+import 'package:covid_app/news/news.dart';
 class CategoryNews extends StatefulWidget {
 
   final String newsCategory;
@@ -34,28 +33,6 @@ class _CategoryNewsState extends State<CategoryNews> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              "Новости",
-              style:
-              TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
-            )
-          ],
-        ),
-        actions: <Widget>[
-          Opacity(
-            opacity: 0,
-            child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Icon(Icons.share,)),
-          )
-        ],
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-      ),
       body: _loading ? Center(
         child: CircularProgressIndicator(),
       ) : SingleChildScrollView(

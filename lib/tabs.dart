@@ -1,6 +1,5 @@
 import 'package:covid_app/User.dart';
-import 'package:covid_app/login_info.dart';
-import 'package:covid_app/news_tab.dart';
+import 'package:covid_app/news/news_homepage.dart';
 import 'package:covid_app/profile_tab.dart';
 import 'package:flutter/material.dart';
 
@@ -16,24 +15,20 @@ class TabPage extends StatefulWidget {
 }
 
 class _TabPageState extends State<TabPage> {
-  static List tabNames = ['Новости','QR коды', 'Поддержка', 'Профиль'];
+  static List tabNames = ['Новости', 'QR коды', 'Поддержка', 'Профиль'];
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   List<Widget> _titleOptions = <Widget>[
-    Text(
-        '${tabNames[0]}'
-    ),
+    Text('${tabNames[0]}'),
     Text(
       '${tabNames[1]}',
     ),
     Text(
       '${tabNames[2]}',
     ),
-    Text(
-      '${tabNames[3]}'
-    ),
+    Text('${tabNames[3]}'),
   ];
 
   void _onItemTapped(int index) {
@@ -51,7 +46,7 @@ class _TabPageState extends State<TabPage> {
       ),
       body: Center(
         child: <Widget>[
-          NewsTabController(),
+          HomePage(),
           HomeScreen(),
           Text(
             'Сhat',

@@ -1,11 +1,12 @@
-import 'package:covid_app/widgets.dart';
-import 'package:flutter/material.dart';
-import 'package:covid_app/models/category_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:covid_app/news2.dart';
+import 'package:covid_app/models/category_model.dart';
+import 'package:covid_app/news/category_news.dart';
+import 'package:covid_app/news/data.dart';
+import 'package:covid_app/news/news.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import '../models/widgets.dart';
 
-import 'category_news.dart';
-import 'data.dart';
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -15,12 +16,17 @@ class _HomePageState extends State<HomePage> {
 
   bool _loading;
   var newslist;
-
   List<CategoryModel> categories = List<CategoryModel>();
 
   void getNews() async {
+    var to = new DateTime.now();
+    var formatter = new DateFormat('yyyy-MM-dd');
+    String myTo = formatter.format(to);
+    print(myTo);
+    var from = DateTime.now().subtract(Duration(days:1));
+    String myFrom = formatter.format(from);
     News news = News();
-    await news.getNews();
+    await news.getNews(myFrom, myTo);
     newslist = news.news;
     setState(() {
       _loading = false;
@@ -39,7 +45,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(),
       body: SafeArea(
         child: _loading
             ? Center(

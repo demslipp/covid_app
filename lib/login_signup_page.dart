@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:covid_app/login_info.dart';
-import 'package:covid_app/quiz_pagee.dart';
+import 'package:covid_app/quiz_page.dart';
 import 'package:flutter/material.dart';
 
 enum _DoubleConstants {

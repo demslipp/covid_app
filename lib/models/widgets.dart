@@ -1,27 +1,5 @@
-import 'package:covid_app/article_view.dart';
+import 'package:covid_app/news/article_view.dart';
 import 'package:flutter/material.dart';
-
-Widget MyAppBar(){
-  return AppBar(
-    title: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text(
-          "Flutter",
-          style:
-          TextStyle(color: Colors.black87, fontWeight: FontWeight.w600),
-        ),
-        Text(
-          "News",
-          style: TextStyle(color: Colors.blue, fontWeight: FontWeight.w600),
-        )
-      ],
-    ),
-    backgroundColor: Colors.transparent,
-    elevation: 0.0,
-  );
-}
-
 
 class NewsTile extends StatelessWidget {
   final String imgUrl, title, desc, content, posturl;
