@@ -1,14 +1,16 @@
-import 'package:covid_app/User.dart';
+import 'package:covid_app/dialog/new_dialog_page.dart';
+import 'package:covid_app/local_user.dart';
 import 'package:covid_app/news/news_homepage.dart';
 import 'package:covid_app/profile_tab.dart';
 import 'package:flutter/material.dart';
 
-import 'home_screen.dart';
+import 'qr_home.dart';
 
 class TabPage extends StatefulWidget {
-  TabPage({this.user});
+  TabPage({this.user, this.logoutCallback});
 
-  User user;
+  LocalUser user;
+  VoidCallback logoutCallback;
 
   @override
   State<StatefulWidget> createState() => _TabPageState();
@@ -40,19 +42,12 @@ class _TabPageState extends State<TabPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: _titleOptions.elementAt(_selectedIndex),
-      ),
       body: Center(
         child: <Widget>[
           HomePage(),
           HomeScreen(),
-          Text(
-            'Сhat',
-            style: optionStyle,
-          ),
-          ProfileTab(user: widget.user)
+          NewDialogPage(),
+          ProfileTab(user: widget.user, logoutCallback: widget.logoutCallback)
         ].elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(

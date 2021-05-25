@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "instant-duality-313816",
+  "private_key_id": "e1ce18bc40d379b66c44b77d627706b65d2ada5c",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC2BaKc38JBI9y0\njZjOOFvFwHk/PTu78XiL+LvUz4QgMnGFj1WYZ5Co5S0GDh6mgwSMreTVXU2dlLoi\n2W1N+NFjbd8uvl9CTkNzqmJflm6E9GSZpzDWhSIY8Czsc+IBTItUzUjfjvjoJAhJ\nwq9BSsUif4BFncGMFeD5a3pwadgGcbnPGukC5BwXBy11YkVigsyrXeV/UuLj30sV\nSu4DNysRAoPdzEkkGDQ36wn36/7SWmYGqC9E6vlNem7RKns2XN+UzUx3AMNbHOO1\n393JDBeNnR14rzstVd3Ftz+uNfpI9nm0uzVX91tJcBxtFITWXaylVMoDwYLRl29x\npNkyu7sxAgMBAAECggEABlTQA8a5C3TWIeCf/Uz9YjWa8g3CShFbjlDWpbpvH9iU\nAB+MzGTj0FV3uV4ch6cHLZEvOb20Vq7G7Qc6Plamiopr6NoTLFZWZyD41CwtHXT2\nb9gegoO10dS+10hY8Y8fnzxBvzxKS6F/OU5AiX6dOKE4jWiv7rG5y4CHIn8IANdS\nUkzQ7GJzmiQAzfu0ymoOVsYPDKxJyarZ9BE7Kfl2zPJXuJsumUCFE0m6JeYjPZjd\nknzYgKkpap1r45JG4fL4Z1ugOSkuzOZyiuDR/ffSx1Z0Nl74DYVSmo32RAGtBo/c\nERqb4ogkYgCd82xr8EhTwhDo7VGCcR2c0uOkcNutkQKBgQDd57EheZ0YgE/2+4eb\ngHRj8yqwyo2dmHDaIq5Ybk1T6exwRbgJ5rNUbfkYYtXLgTOCNo4K5am16bY3GAFa\nDxrspe/De3G4l7njhflR7aMV0oIM12RmSgTPkhVuW3P1uTnFq0UJ1O5FxHELMrGw\nEyIDafjlFIiZu9B3yHbO6BQpWQKBgQDR/TPxfuKGTm28i+VgVxwvLy0KMVvjxn94\nJ0nNO2BTJKyk77G8YP1VRwryfqQklESfEEg5Xyb54E7aZHUicCq/SNC5P9RpPvvb\nxjjIurkiUU0bthz5dj1EYdFlvgMaJLVOFLWcr7NEdsMfVgbHPq2rmijmo+AUPdDb\nUsSSLRGNmQKBgGPOwz/gOEV96PmYtqy9gRw3khsEb9/TYebrNGm36vX0QBFbemSR\nrFUsRZ6vTaQDz8wgh5DlLYkRvpBXLrx4EM8h746IJmU1cTmh17r+3JyDG1V1R8Yu\nQq2t8g+5+JUsI40B9MJwUF929LVprrwYTvMkJfu7WZlz/VbzBmUXw4G5AoGAS4MA\n/dPCA8gKQCYSev14PiN5z9OGFreXuQ5vxKSYc+2ZQ8qKIJLEJrlgX2lY/2pt7sE9\nJ5xm+K5HzNMZKCQryxOVMziX2qzyhsqWOuCimIuh7dgkPTTevUtrsGmO1gTjScu6\nrzijf3gxnIAj+dw5OZ87HA1MFBtSkrwFwgcA6+kCgYA4mlSzc+AZjALvh3T4UP+s\njmF737iWG+jCjuFkgR3yy+hjhtjwABqQpzpkmUZ45A72lmQtmX0b81a+txnf7mTM\ncqx0FyGOFS3HimrRVkmChpLFA6ismvUvxbPvj3lQ/F0Roupberbzotas0ajrbaQy\n0et3SoWM3gh0wGBux2+tfg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "mydialogflow@instant-duality-313816.iam.gserviceaccount.com",
+  "client_id": "103445556194762446279",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mydialogflow%40instant-duality-313816.iam.gserviceaccount.com"
+}

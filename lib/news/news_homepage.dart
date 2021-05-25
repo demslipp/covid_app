@@ -45,6 +45,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Новости'),
+      ),
       body: SafeArea(
         child: _loading
             ? Center(

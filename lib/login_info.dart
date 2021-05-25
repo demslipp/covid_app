@@ -1,12 +1,16 @@
 import 'dart:ui';
 
-import 'package:covid_app/User.dart';
+import 'package:covid_app/local_user.dart';
 import 'package:covid_app/quiz_page.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class LoginInfo extends StatefulWidget {
+  LoginInfo({this.signUpCallback});
+
+  Function(LocalUser) signUpCallback;
+
   @override
   State<StatefulWidget> createState() => _LoginInfoState();
 }
@@ -163,12 +167,13 @@ class _LoginInfoState extends State<LoginInfo> {
             context,
             MaterialPageRoute(
               builder: (context) => QuizPage2(
-                  user: new User(
+                  user: new LocalUser(
                       surname: _surname.value.text,
                       firstname: _name.value.text,
                       date: _dateTime,
                       country: _country.value.text,
-                      city: _city.value.text)),
+                      city: _city.value.text),
+              signUpCallback: widget.signUpCallback),
             ));
       },
       child: Padding(

@@ -1,15 +1,16 @@
 import 'dart:ui';
 
-import 'package:covid_app/User.dart';
+import 'package:covid_app/local_user.dart';
 import 'package:covid_app/quiz_page.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ProfileTab extends StatefulWidget {
-  ProfileTab({this.user});
+  ProfileTab({this.user, this.logoutCallback});
 
-  User user;
+  LocalUser user;
+  VoidCallback logoutCallback;
 
   @override
   State<StatefulWidget> createState() => _ProfileTabState();
@@ -29,6 +30,9 @@ class _ProfileTabState extends State<ProfileTab> {
 
   @override
   void initState() {
+    if (widget.user==null) {
+      widget.user = LocalUser.randomLocalUser();
+    }
     _surname.text = widget.user.surname;
     _name.text = widget.user.firstname;
     _city.text = widget.user.city;
@@ -41,6 +45,16 @@ class _ProfileTabState extends State<ProfileTab> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      appBar: AppBar(
+        title: Text('Профиль'),
+        actions: [
+          // GestureDetector(
+          //     child: Icon(Icons.logout),
+          //     onTap: () => logout())
+          MaterialButton(onPressed: logout,
+          child: Icon(Icons.logout))
+        ],
+      ),
       body: Stack(
         children: <Widget>[
           _showForm(),
@@ -182,7 +196,7 @@ class _ProfileTabState extends State<ProfileTab> {
             context,
             MaterialPageRoute(
               builder: (context) => QuizPage2(
-                  user: new User(
+                  user: new LocalUser(
                       surname: _surname.value.text,
                       firstname: _name.value.text,
                       date: _dateTime,
@@ -204,10 +218,9 @@ class _ProfileTabState extends State<ProfileTab> {
     );
   }
 
-  void finishlog() {
-    setState() {
-      islogended = true;
-    }
+
+  void logout() {
+    widget.logoutCallback();
   }
 }
 

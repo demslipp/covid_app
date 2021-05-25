@@ -9,10 +9,15 @@ class News {
   List<Article> news = [];
 
   Future<void> getNews(myFrom, myTo) async {
-    String url =
-        "http://newsapi.org/v2/everything?q=коронавирус&language=ru&from=$myFrom&to=$myTo&sortBy=publishedAt&apiKey=$apiKey";
-    print("url check:  " + url);
-    var response = await http.get(url);
+
+    Uri uri = Uri.http("newsapi.org", "/v2/everything", {"q" : "коронавирус", "language" : "ru",
+      "from" : "$myFrom", "to" : "$myTo", "sortBy" : "publishedAt", "apiKey" : "$apiKey"});
+
+    print("url check:" + uri.toString());
+
+    var response = await http.get(uri);
+
+    print(response.body);
 
     var jsonData = jsonDecode(response.body);
 
@@ -46,10 +51,12 @@ class NewsForCategory {
     var from = DateTime.now().subtract(Duration(days: 1));
     String myFrom = formatter.format(from);
 
-    String url =
-        "http://newsapi.org/v2/everything?q=$category&from=$myFrom&to=$myTo&sortBy=publishedAt&apiKey=$apiKey";
-    print("url check: " + url);
-    var response = await http.get(url);
+    Uri uri = Uri.http("newsapi.org", "/v2/everything", {"q" : "$category",
+      "from" : "$myFrom", "to" : "$myTo", "sortBy" : "publishedAt", "apiKey" : "$apiKey"});
+
+    print("Uri check: " + uri.toString());
+
+    var response = await http.get(uri);
 
     var jsonData = jsonDecode(response.body);
 

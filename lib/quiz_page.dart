@@ -1,16 +1,17 @@
 import 'dart:ui';
 
-import 'package:covid_app/User.dart';
+import 'package:covid_app/local_user.dart';
 import 'package:covid_app/tabs.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 
 class QuizPage2 extends StatefulWidget {
   QuizPage2({
-    this.user,
+    this.user, this.signUpCallback
   });
 
-  User user;
+  LocalUser user;
+  Function(LocalUser) signUpCallback;
 
   @override
   _QuizPage2State createState() => _QuizPage2State();
@@ -193,18 +194,14 @@ class _QuizPage2State extends State<QuizPage2> {
                                   isQuizSuccess
                                       ? Text("Красный",
                                           textAlign: TextAlign.center,
-                                          style: new TextStyle(fontSize: 30.0))
+                                          style: new TextStyle(fontSize: 30.0, color: Colors.red))
                                       : Text("Зеленый",
                                           textAlign: TextAlign.center,
-                                          style: new TextStyle(fontSize: 30.0)),
+                                          style: new TextStyle(fontSize: 30.0, color: Colors.green)),
                                   GestureDetector(
                                     onTap: () {
-                                      Navigator.pushAndRemoveUntil(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  TabPage(user: widget.user)),
-                                          (Route<dynamic> route) => false);
+                                      widget.signUpCallback(widget.user);
+                                      Navigator.of(context).popUntil((route) => route.isFirst);
                                     },
                                     child: Padding(
                                         padding: EdgeInsets.fromLTRB(
@@ -213,7 +210,7 @@ class _QuizPage2State extends State<QuizPage2> {
                                           height: 50.0,
                                           child: new MaterialButton(
                                             disabledColor: Colors.blue,
-                                            child: new Text('Home screen',
+                                            child: new Text('Продолжить',
                                                 style: new TextStyle(
                                                     fontSize: 24.0,
                                                     color: Colors.white)),

@@ -1,6 +1,8 @@
 import 'dart:ui';
 
+import 'package:covid_app/local_user.dart';
 import 'package:covid_app/login_info.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 enum _DoubleConstants {
@@ -8,6 +10,8 @@ enum _DoubleConstants {
   textFieldContainerWidth,
   textFieldDecorationBorderWidth
 }
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
 
 extension _DoubleConstantsExtension on _DoubleConstants {
   double get value {
@@ -27,7 +31,7 @@ extension _DoubleConstantsExtension on _DoubleConstants {
 class LoginSignUpPage extends StatefulWidget {
   LoginSignUpPage({this.loginCallback});
 
-  final VoidCallback loginCallback;
+  final Function(LocalUser) loginCallback;
 
   @override
   State<StatefulWidget> createState() => _LoginSignUpPageState();
@@ -50,6 +54,69 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
       return true;
     }
     return false;
+  }
+
+  void validateAndSubmit() async {
+    setState(() {
+      _errorMessage = "";
+      _isLoading = true;
+    });
+    if (validateAndSave()) {
+      String userId = "";
+      try {
+        if (_isLoginForm) {
+          final User user = (await _auth.signInWithEmailAndPassword(
+            email: _email.value.text,
+            password: _password.value.text,
+          ))
+              .user;
+          userId = await user.getIdToken();
+          print('Signed in: $userId');
+
+          widget.loginCallback(LocalUser.randomLocalUser());
+
+          setState(() {
+            _isLoading = false;
+          });
+
+        } else {
+          await _auth
+              .createUserWithEmailAndPassword(
+            email: _email.value.text,
+            password: _password.value.text,
+          )
+              .then((user) {
+            //If a user is successfully created with an appropriate email
+            if (user.user != null) {
+              user.user.sendEmailVerification();
+            }
+          });
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => LoginInfo(signUpCallback: signUp)),
+          );
+          //widget.auth.sendEmailVerification();
+          //_showVerifyEmailSentDialog();
+        }
+        setState(() {
+          _isLoading = false;
+        });
+
+      } catch (e) {
+        print('Error: $e');
+        setState(() {
+          _isLoading = false;
+          _errorMessage = e.toString();
+          _formKey.currentState.reset();
+        });
+      }
+    }
+  }
+
+  void signUp(LocalUser localUser) {
+      print("Sign up success");
+      print(localUser.firstname);
+      widget.loginCallback(localUser);
   }
 
   @override
@@ -157,10 +224,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
   Widget showPrimaryButton() {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => LoginInfo()),
-        );
+        validateAndSubmit();
       },
       child: Padding(
           padding:
