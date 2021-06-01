@@ -9,9 +9,7 @@ import 'package:flutter/services.dart';
 
 void main() => runApp(ExampleApp());
 
-/// The example application class
 class ExampleApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(

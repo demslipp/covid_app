@@ -20,10 +20,6 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
-    final message =
-        // ignore: lines_longer_than_80_chars
-        'Hey this is a QR code. Change this value in the main_screen.dart file.';
-
     final qrFutureBuilder = FutureBuilder<ui.Image>(
       future: _loadOverlayImage(),
       builder: (ctx, snapshot) {
@@ -34,7 +30,6 @@ class _MainScreenState extends State<MainScreen> {
         return CustomPaint(
           size: Size.square(size),
           painter: QrPainter(
-            data: message,
             version: QrVersions.auto,
             eyeStyle: const QrEyeStyle(
               eyeShape: QrEyeShape.square,
@@ -73,7 +68,6 @@ class _MainScreenState extends State<MainScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40)
                     .copyWith(bottom: 40),
-                child: Text(message),
               ),
             ],
           ),
@@ -84,7 +78,7 @@ class _MainScreenState extends State<MainScreen> {
 
   Future<ui.Image> _loadOverlayImage() async {
     final completer = Completer<ui.Image>();
-    final byteData = await rootBundle.load('assets/images/4.0x/logo_yakka.png');
+    final byteData = await rootBundle.load('');
     ui.decodeImageFromList(byteData.buffer.asUint8List(), completer.complete);
     return completer.future;
   }

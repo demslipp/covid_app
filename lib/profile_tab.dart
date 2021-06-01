@@ -30,7 +30,7 @@ class _ProfileTabState extends State<ProfileTab> {
 
   @override
   void initState() {
-    if (widget.user==null) {
+    if (widget.user == null) {
       widget.user = LocalUser.randomLocalUser();
     }
     _surname.text = widget.user.surname;
@@ -51,8 +51,7 @@ class _ProfileTabState extends State<ProfileTab> {
           // GestureDetector(
           //     child: Icon(Icons.logout),
           //     onTap: () => logout())
-          MaterialButton(onPressed: logout,
-          child: Icon(Icons.logout))
+          MaterialButton(onPressed: logout, child: Icon(Icons.logout))
         ],
       ),
       body: Stack(
@@ -164,8 +163,6 @@ class _ProfileTabState extends State<ProfileTab> {
     );
   }
 
-  void shit() {}
-
   Widget showDateInput() {
     return Column(children: <Widget>[
       DateTimeField(
@@ -218,11 +215,11 @@ class _ProfileTabState extends State<ProfileTab> {
     );
   }
 
-
   void logout() {
     widget.logoutCallback();
   }
 }
+
 
 /*class BasicDateField extends StatelessWidget {
   final format = DateFormat("yyyy-MM-dd");

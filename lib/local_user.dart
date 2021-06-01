@@ -7,7 +7,7 @@ class LocalUser {
   String country;
   String city;
   DateTime date;
-  final format = DateFormat("yyyy-MM-dd");
+  final format = DateFormat("dd-MM-yyyy");
 
   LocalUser({
     this.surname,
