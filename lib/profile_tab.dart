@@ -3,8 +3,11 @@ import 'dart:ui';
 import 'package:covid_app/local_user.dart';
 import 'package:covid_app/quiz_page.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class ProfileTab extends StatefulWidget {
   ProfileTab({this.user, this.logoutCallback});
@@ -51,7 +54,8 @@ class _ProfileTabState extends State<ProfileTab> {
           // GestureDetector(
           //     child: Icon(Icons.logout),
           //     onTap: () => logout())
-          MaterialButton(onPressed: logout, child: Icon(Icons.logout))
+          MaterialButton(
+              onPressed: logout, child: Icon(Icons.logout, color: Colors.white))
         ],
       ),
       body: Stack(
@@ -218,8 +222,12 @@ class _ProfileTabState extends State<ProfileTab> {
   void logout() {
     widget.logoutCallback();
   }
-}
 
+  Future<void> info() async {
+    var token = await _auth.currentUser.getIdToken(false);
+    print("Bearer " + token);
+  }
+}
 
 /*class BasicDateField extends StatelessWidget {
   final format = DateFormat("yyyy-MM-dd");

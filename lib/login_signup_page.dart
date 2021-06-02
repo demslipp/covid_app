@@ -78,7 +78,6 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
           setState(() {
             _isLoading = false;
           });
-
         } else {
           await _auth
               .createUserWithEmailAndPassword(
@@ -93,7 +92,8 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
           });
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => LoginInfo(signUpCallback: signUp)),
+            MaterialPageRoute(
+                builder: (context) => LoginInfo(signUpCallback: signUp)),
           );
           //widget.auth.sendEmailVerification();
           //_showVerifyEmailSentDialog();
@@ -101,7 +101,6 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
         setState(() {
           _isLoading = false;
         });
-
       } catch (e) {
         print('Error: $e');
         setState(() {
@@ -114,9 +113,9 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
   }
 
   void signUp(LocalUser localUser) {
-      print("Sign up success");
-      print(localUser.firstname);
-      widget.loginCallback(localUser);
+    print("Sign up success");
+    print(localUser.firstname);
+    widget.loginCallback(localUser);
   }
 
   @override
