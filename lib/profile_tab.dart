@@ -1,18 +1,20 @@
 import 'dart:ui';
 
 import 'package:covid_app/local_user.dart';
+import 'package:covid_app/models/temperatur.dart';
 import 'package:covid_app/quiz_page.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
+FirebaseDatabase _database = FirebaseDatabase.instance;
 
 class ProfileTab extends StatefulWidget {
-  ProfileTab({this.user, this.logoutCallback});
+  ProfileTab({this.logoutCallback});
 
-  LocalUser user;
   VoidCallback logoutCallback;
 
   @override
@@ -24,25 +26,26 @@ class _ProfileTabState extends State<ProfileTab> {
   TextEditingController _name = TextEditingController();
   TextEditingController _country = TextEditingController();
   TextEditingController _city = TextEditingController();
+  TextEditingController _temperature = TextEditingController();
   DateTime _dateTime;
   bool _isLoading = false;
   bool _isEditable = false;
 
   final format = DateFormat("dd-MM-yyyy");
   bool islogended = false;
+  LocalUser _user;
 
   @override
   void initState() {
-    if (widget.user == null) {
-      widget.user = LocalUser.randomLocalUser();
-    }
-    _surname.text = widget.user.surname;
-    _name.text = widget.user.firstname;
-    _city.text = widget.user.city;
-    _country.text = widget.user.country;
-    _dateTime = widget.user.date;
-
     super.initState();
+  }
+
+  void updateState() {
+    _surname.text = _user.surname;
+    _name.text = _user.firstname;
+    _city.text = _user.city;
+    _country.text = _user.country;
+    _dateTime = _user.date;
   }
 
   @override
@@ -82,22 +85,34 @@ class _ProfileTabState extends State<ProfileTab> {
   }
 
   Widget _showForm() {
-    return new SafeArea(
-        child: Container(
-            padding: EdgeInsets.all(10.0),
-            child: new Form(
-              child: new ListView(
-                shrinkWrap: true,
-                children: <Widget>[
-                  //showLogo(),
-                  showSurnameInput(),
-                  showFirstnameInput(),
-                  showCountryInput(),
-                  showCityInput(),
-                  showDateInput(),
-                ],
-              ),
-            )));
+    child:
+    return FutureBuilder(
+        future: _localUser(),
+        builder: (ctx, snapshot) {
+          final size = 280.0;
+          if (!snapshot.hasData) {
+            return Container(width: size, height: size);
+          }
+          _user = snapshot.data;
+          updateState();
+          return Container(
+              padding: EdgeInsets.all(10.0),
+              child: new Form(
+                child: new ListView(
+                  shrinkWrap: true,
+                  children: <Widget>[
+                    //showLogo(),
+                    showSurnameInput(),
+                    showFirstnameInput(),
+                    showCountryInput(),
+                    showCityInput(),
+                    showDateInput(),
+                    showTemperatureInput(),
+                    showTemperaturesList()
+                  ],
+                ),
+              ));
+        });
   }
 
   Widget showSurnameInput() {
@@ -219,6 +234,54 @@ class _ProfileTabState extends State<ProfileTab> {
     );
   }
 
+  Widget showTemperatureInput() {
+    return new Padding(
+        padding: EdgeInsets.fromLTRB(10.0, 00.0, 0.0, 0.4),
+        child: new Column(
+          children: [
+            TextField(
+              maxLines: 1,
+              keyboardType: TextInputType.number,
+              enabled: true,
+              autofocus: true,
+              controller: _temperature,
+              decoration: InputDecoration(
+                  border: InputBorder.none, hintText: 'Температура'),
+              showCursor: true,
+              autocorrect: false,
+            ),
+            MaterialButton(
+                onPressed: _addTemperature,
+                child: Icon(Icons.plus_one, color: Colors.black))
+          ],
+        ));
+  }
+
+  Widget showTemperaturesList() {
+    child:
+    return FutureBuilder(
+        future: _temperatureList(),
+        builder: (ctx, snapshot) {
+          if (snapshot.data == null) {
+            return Container();
+          }
+          print(snapshot.data.length);
+
+          List<Widget> temperatueList = [];
+          for (Temperature temperature in snapshot.data) {
+            temperatueList.add(ListTile(title: Text(temperature.value)));
+          }
+          return Column(
+            children: temperatueList,
+          );
+          // return ListView.builder(
+          //   itemCount: snapshot.data.length,
+          //   itemBuilder: (context, index) =>
+          //       ListTile(title: Text(snapshot.data[index].value)),
+          // );
+        });
+  }
+
   void logout() {
     widget.logoutCallback();
   }
@@ -226,6 +289,62 @@ class _ProfileTabState extends State<ProfileTab> {
   Future<void> info() async {
     var token = await _auth.currentUser.getIdToken(false);
     print("Bearer " + token);
+  }
+
+  void _addTemperature() {
+    var id = _auth.currentUser.uid;
+    _database
+        .reference()
+        .child('temperatures')
+        .child(id)
+        .push()
+        .set(<String, String>{
+      "value": _temperature.text,
+      "date": DateTime.now().toIso8601String()
+    }).then((value) {
+      setState(() {});
+    });
+  }
+
+  Future<List<Temperature>> _temperatureList() async {
+    return await _database
+        .reference()
+        .child('temperatures')
+        .child(_auth.currentUser.uid)
+        .once()
+        .then((DataSnapshot snapshot) {
+      List<Temperature> _temperatureList = [];
+      snapshot.value.forEach((_, value) {
+        print(value['value']);
+        _temperatureList.add(Temperature(
+            value: value['value'], date: DateTime.parse(value['date'])));
+      });
+
+      return _temperatureList;
+    });
+  }
+
+  Future<LocalUser> _localUser() async {
+    return await _database
+        .reference()
+        .child('users')
+        .child(_auth.currentUser.uid)
+        .once()
+        .then((DataSnapshot snapshot) {
+      print(snapshot.value);
+      print(snapshot.value['surname']);
+      print(snapshot.value['firstname']);
+      print(snapshot.value['country']);
+      print(snapshot.value['city']);
+      print(snapshot.value['date']);
+
+      return LocalUser(
+          firstname: snapshot.value['firstname'],
+          surname: snapshot.value['surname'],
+          date: DateTime.parse(snapshot.value['date']),
+          country: snapshot.value['country'],
+          city: snapshot.value['city']);
+    });
   }
 }
 

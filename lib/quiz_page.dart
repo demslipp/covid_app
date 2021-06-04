@@ -3,12 +3,15 @@ import 'dart:ui';
 import 'package:covid_app/local_user.dart';
 import 'package:covid_app/tabs.dart';
 import 'package:enum_to_string/enum_to_string.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
+FirebaseDatabase _database = FirebaseDatabase.instance;
+FirebaseAuth _auth = FirebaseAuth.instance;
+
 class QuizPage2 extends StatefulWidget {
-  QuizPage2({
-    this.user, this.signUpCallback
-  });
+  QuizPage2({this.user, this.signUpCallback});
 
   LocalUser user;
   Function(LocalUser) signUpCallback;
@@ -194,14 +197,20 @@ class _QuizPage2State extends State<QuizPage2> {
                                   isQuizSuccess
                                       ? Text("Красный",
                                           textAlign: TextAlign.center,
-                                          style: new TextStyle(fontSize: 30.0, color: Colors.red))
+                                          style: new TextStyle(
+                                              fontSize: 30.0,
+                                              color: Colors.red))
                                       : Text("Зеленый",
                                           textAlign: TextAlign.center,
-                                          style: new TextStyle(fontSize: 30.0, color: Colors.green)),
+                                          style: new TextStyle(
+                                              fontSize: 30.0,
+                                              color: Colors.green)),
                                   GestureDetector(
                                     onTap: () {
+                                      registerUser();
                                       widget.signUpCallback(widget.user);
-                                      Navigator.of(context).popUntil((route) => route.isFirst);
+                                      Navigator.of(context)
+                                          .popUntil((route) => route.isFirst);
                                     },
                                     child: Padding(
                                         padding: EdgeInsets.fromLTRB(
@@ -224,6 +233,18 @@ class _QuizPage2State extends State<QuizPage2> {
                 : Container()
           ],
         ));
+  }
+
+  void registerUser() async {
+    var id = _auth.currentUser.uid;
+    await _database.reference().child('users').child(id).set(<String, String>{
+      "id": id,
+      "surname": widget.user.surname,
+      "firstname": widget.user.firstname,
+      "city": widget.user.city,
+      "country": widget.user.country,
+      'date': widget.user.date.toIso8601String()
+    });
   }
 
   void finishQuiz() {

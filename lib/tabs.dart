@@ -47,7 +47,7 @@ class _TabPageState extends State<TabPage> {
           HomePage(),
           HomeScreen(),
           NewDialogPage(),
-          ProfileTab(user: widget.user, logoutCallback: widget.logoutCallback)
+          ProfileTab(logoutCallback: widget.logoutCallback)
         ].elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(

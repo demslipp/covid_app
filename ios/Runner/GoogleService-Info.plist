@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>969710612617-aad1d7of7drieqm95dkgavu84epn2gkn.apps.googleusercontent.com</string>
+	<string>969710612617-l64sakt23gu9li7s7045q2dm52m73vti.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.969710612617-aad1d7of7drieqm95dkgavu84epn2gkn</string>
+	<string>com.googleusercontent.apps.969710612617-l64sakt23gu9li7s7045q2dm52m73vti</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBd-3gFCuzKB8m6y-FYZZi691_x3Ugb-Ig</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.covidApp</string>
+	<string>ru.mcoff.covidApp</string>
 	<key>PROJECT_ID</key>
 	<string>covid-app-rus</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:969710612617:ios:efbc160cbdcadd9cf65658</string>
+	<string>1:969710612617:ios:242f5504f2d93476f65658</string>
+	<key>DATABASE_URL</key>
+	<string>https://covid-app-rus-default-rtdb.europe-west1.firebasedatabase.app</string>
 </dict>
 </plist>
