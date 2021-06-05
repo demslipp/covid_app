@@ -344,13 +344,16 @@ class _ProfileTabState extends State<ProfileTab> {
         .reference()
         .child('temperatures')
         .child(_auth.currentUser.uid)
+        .orderByChild("date")
         .once()
         .then((DataSnapshot snapshot) {
       List<Temperature> _temperatureList = [];
       snapshot.value.forEach((_, value) {
         print(value['value']);
-        _temperatureList.add(Temperature(
-            value: value['value'], date: DateTime.parse(value['date'])));
+        _temperatureList.insert(
+            0,
+            Temperature(
+                value: value['value'], date: DateTime.parse(value['date'])));
       });
 
       return _temperatureList;
