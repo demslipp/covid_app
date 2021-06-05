@@ -6,7 +6,7 @@ import 'app_body.dart';
 class NewDialogPage extends StatefulWidget {
   NewDialogPage({Key key}) : super(key: key);
 
-  final String title = "Chat";
+  final String title = "Поддержка";
 
   @override
   _NewDialogPageState createState() => _NewDialogPageState();
