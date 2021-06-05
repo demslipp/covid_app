@@ -124,8 +124,16 @@ class _ProfileTabState extends State<ProfileTab> {
         autofocus: true,
         enabled: _isEditable,
         controller: _surname,
-        decoration:
-            InputDecoration(border: InputBorder.none, hintText: 'Фамилия'),
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(vertical: 15),
+          labelText: "Фамилия",
+          hintText: 'Фамилия',
+          hintStyle: TextStyle(
+              color: Colors.grey, fontSize: 18, fontWeight: FontWeight.w500),
+          labelStyle: TextStyle(
+              color: Colors.grey, fontSize: 18, fontWeight: FontWeight.w500),
+          border: InputBorder.none,
+        ),
         showCursor: true,
         autocorrect: false,
       ),
@@ -141,7 +149,16 @@ class _ProfileTabState extends State<ProfileTab> {
         autofocus: true,
         controller: _name,
         enabled: _isEditable,
-        decoration: InputDecoration(border: InputBorder.none, hintText: 'Имя'),
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(vertical: 15),
+          labelText: "Имя",
+          hintText: 'Имя',
+          hintStyle: TextStyle(
+              color: Colors.grey, fontSize: 18, fontWeight: FontWeight.w500),
+          labelStyle: TextStyle(
+              color: Colors.grey, fontSize: 18, fontWeight: FontWeight.w500),
+          border: InputBorder.none,
+        ),
         showCursor: true,
         autocorrect: false,
       ),
@@ -157,8 +174,16 @@ class _ProfileTabState extends State<ProfileTab> {
         autofocus: true,
         controller: _country,
         enabled: _isEditable,
-        decoration:
-            InputDecoration(border: InputBorder.none, hintText: 'Страна'),
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(vertical: 15),
+          labelText: "Страна",
+          hintText: 'Страна',
+          hintStyle: TextStyle(
+              color: Colors.grey, fontSize: 18, fontWeight: FontWeight.w500),
+          labelStyle: TextStyle(
+              color: Colors.grey, fontSize: 18, fontWeight: FontWeight.w500),
+          border: InputBorder.none,
+        ),
         showCursor: true,
         autocorrect: false,
       ),
@@ -174,8 +199,16 @@ class _ProfileTabState extends State<ProfileTab> {
         enabled: _isEditable,
         autofocus: true,
         controller: _city,
-        decoration:
-            InputDecoration(border: InputBorder.none, hintText: 'Город'),
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(vertical: 15),
+          labelText: "Город",
+          hintText: 'Город',
+          hintStyle: TextStyle(
+              color: Colors.grey, fontSize: 18, fontWeight: FontWeight.w500),
+          labelStyle: TextStyle(
+              color: Colors.grey, fontSize: 18, fontWeight: FontWeight.w500),
+          border: InputBorder.none,
+        ),
         showCursor: true,
         autocorrect: false,
       ),
@@ -183,62 +216,43 @@ class _ProfileTabState extends State<ProfileTab> {
   }
 
   Widget showDateInput() {
-    return Column(children: <Widget>[
-      DateTimeField(
-        format: format,
-        scrollPadding: EdgeInsets.fromLTRB(20.0, 200.0, 0.0, 0.4),
-        decoration: InputDecoration(
-            border: InputBorder.none, hintText: 'Дата рождения'),
-        initialValue: _dateTime,
-        enabled: _isEditable,
-        onChanged: (DateTime date) {
-          _dateTime = date;
-        },
-        onShowPicker: (context, currentValue) {
-          return showDatePicker(
-              context: context,
-              firstDate: DateTime(1940),
-              initialDate: currentValue ?? DateTime.now(),
-              lastDate: DateTime(2022));
-        },
-      ),
-    ]);
-  }
-
-  Widget stopButton() {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => QuizPage2(
-                  user: new LocalUser(
-                      surname: _surname.value.text,
-                      firstname: _name.value.text,
-                      date: _dateTime,
-                      country: _country.value.text,
-                      city: _city.value.text)),
-            ));
-      },
-      child: Padding(
-          padding: EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
-          child: SizedBox(
-            height: 50.0,
-            child: new MaterialButton(
-              disabledColor: Colors.blue,
-              child: new Text('Далее',
-                  style: new TextStyle(fontSize: 18.0, color: Colors.white)),
-              onPressed: null,
-            ),
-          )),
-    );
+    return Padding(
+        padding: EdgeInsets.fromLTRB(10.0, 00.0, 0.0, 0.4),
+        child: DateTimeField(
+          format: format,
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(vertical: 15),
+            labelText: "Фамилия",
+            hintText: 'Фамилия',
+            hintStyle: TextStyle(
+                color: Colors.grey, fontSize: 18, fontWeight: FontWeight.w500),
+            labelStyle: TextStyle(
+                color: Colors.grey, fontSize: 18, fontWeight: FontWeight.w500),
+            border: InputBorder.none,
+          ),
+          initialValue: _dateTime,
+          enabled: _isEditable,
+          onChanged: (DateTime date) {
+            _dateTime = date;
+          },
+          onShowPicker: (context, currentValue) {
+            return showDatePicker(
+                context: context,
+                firstDate: DateTime(1940),
+                initialDate: currentValue ?? DateTime.now(),
+                lastDate: DateTime(2022));
+          },
+        ));
   }
 
   Widget showTemperatureInput() {
     return new Padding(
-        padding: EdgeInsets.fromLTRB(10.0, 00.0, 0.0, 0.4),
+        padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0.4),
         child: new Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            Padding(
+                padding: EdgeInsets.fromLTRB(0, 10, 0, 10), child: Divider()),
             TextField(
               maxLines: 1,
               keyboardType: TextInputType.number,
@@ -246,13 +260,30 @@ class _ProfileTabState extends State<ProfileTab> {
               autofocus: true,
               controller: _temperature,
               decoration: InputDecoration(
-                  border: InputBorder.none, hintText: 'Температура'),
+                contentPadding: EdgeInsets.symmetric(vertical: 15),
+                labelText: "Температура",
+                hintText: '36.6',
+                hintStyle: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500),
+                labelStyle: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500),
+                border: InputBorder.none,
+              ),
               showCursor: true,
               autocorrect: false,
             ),
-            MaterialButton(
-                onPressed: _addTemperature,
-                child: Icon(Icons.plus_one, color: Colors.black))
+            Padding(
+                padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                child: RaisedButton(
+                    color: Colors.blue,
+                    textColor: Colors.white,
+                    splashColor: Colors.blueGrey,
+                    onPressed: _addTemperature,
+                    child: const Text('Добавить температуру')))
           ],
         ));
   }
@@ -269,7 +300,9 @@ class _ProfileTabState extends State<ProfileTab> {
 
           List<Widget> temperatueList = [];
           for (Temperature temperature in snapshot.data) {
-            temperatueList.add(ListTile(title: Text(temperature.value)));
+            temperatueList.add(ListTile(
+                title: Text(temperature.value),
+                subtitle: Text(format.format(temperature.date))));
           }
           return Column(
             children: temperatueList,
