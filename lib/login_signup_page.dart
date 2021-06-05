@@ -182,6 +182,8 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
       child: Center(
         child: Text(
           _isLoginForm ? "Аккаунт пользователя" : "Регистрация",
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
       ),
     );
@@ -189,7 +191,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
 
   Widget showEmailInput() {
     return new Padding(
-      padding: EdgeInsets.fromLTRB(0.0, _isLoginForm ? 10.0 : 00.0, 0.0, 0.4),
+      padding: EdgeInsets.fromLTRB(0.0, 20, 0.0, 0.4),
       child: new TextField(
         maxLines: 1,
         keyboardType: TextInputType.emailAddress,
@@ -226,8 +228,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
         validateAndSubmit();
       },
       child: Padding(
-          padding:
-              EdgeInsets.fromLTRB(0.0, _isLoginForm ? 40.0 : 30.0, 0.0, 0.0),
+          padding: EdgeInsets.fromLTRB(0.0, 40, 0.0, 0.0),
           child: SizedBox(
             height: 50.0,
             child: new MaterialButton(
@@ -241,11 +242,14 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
   }
 
   Widget showSecondaryButton() {
-    return new MaterialButton(
-        child: new Text(
-            _isLoginForm ? 'Cоздать аккаунт' : 'Уже есть аккаунт? Войдите',
-            style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300)),
-        onPressed: toggleFormMode);
+    return Padding(
+        padding: EdgeInsets.only(top: 10),
+        child: MaterialButton(
+            child: new Text(
+                _isLoginForm ? 'Cоздать аккаунт' : 'Уже есть аккаунт? Войдите',
+                style:
+                    new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300)),
+            onPressed: toggleFormMode));
   }
 
   Widget showErrorMessage() {
