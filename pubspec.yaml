@@ -39,7 +39,8 @@ dependencies:
   cloud_firestore: ^1.0.3
   dialog_flowtter: ^0.3.0
   file_picker: ^3.0.0
-
+  json_serializable: ^4.0.0
+  flutter_svg: ^0.22.0
 
 
 
@@ -64,6 +65,9 @@ flutter:
   uses-material-design: true
   assets:
     - assets/dialog_flow_auth.json
+    - assets/back.svg
+    - assets/to.svg
+    - assets/corona.svg
 
   # To add assets to your application, add an assets section, like this:
   # assets:

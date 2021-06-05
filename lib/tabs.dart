@@ -2,6 +2,7 @@ import 'package:covid_app/dialog/new_dialog_page.dart';
 import 'package:covid_app/local_user.dart';
 import 'package:covid_app/news/news_homepage.dart';
 import 'package:covid_app/profile_tab.dart';
+import 'package:covid_app/restrictions.dart';
 import 'package:flutter/material.dart';
 
 import 'qr_home.dart';
@@ -17,7 +18,13 @@ class TabPage extends StatefulWidget {
 }
 
 class _TabPageState extends State<TabPage> {
-  static List tabNames = ['Новости', 'QR коды', 'Поддержка', 'Профиль'];
+  static List tabNames = [
+    'Новости',
+    'QR коды',
+    'Доступность',
+    'Поддержка',
+    'Профиль'
+  ];
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -31,6 +38,7 @@ class _TabPageState extends State<TabPage> {
       '${tabNames[2]}',
     ),
     Text('${tabNames[3]}'),
+    Text('${tabNames[4]}'),
   ];
 
   void _onItemTapped(int index) {
@@ -46,6 +54,7 @@ class _TabPageState extends State<TabPage> {
         child: <Widget>[
           HomePage(),
           HomeScreen(),
+          RestrictionsTab(),
           NewDialogPage(),
           ProfileTab(logoutCallback: widget.logoutCallback)
         ].elementAt(_selectedIndex),
@@ -61,12 +70,16 @@ class _TabPageState extends State<TabPage> {
             label: tabNames[1],
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.message),
+            icon: Icon(Icons.airplanemode_active),
             label: tabNames[2],
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.message),
             label: tabNames[3],
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: tabNames[4],
           ),
         ],
         currentIndex: _selectedIndex,
